@@ -3,6 +3,9 @@
 var express = require('express');
 var app = express();
 
+app.use(express.json()) // for parsing application/json : post 방식 body 파싱 용도
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded : post 방식 body 파싱 용도
+
 // set the view engine to ejs :  viewes폴더에 index.ejs를 만들어 사용 
 app.set('view engine', 'ejs');  // ejs 파일을 만들어서 render로 응답에 실어 보낼 수 있음
 
@@ -12,6 +15,18 @@ app.set('view engine', 'ejs');  // ejs 파일을 만들어서 render로 응답�
 app.get('/', function(req, res) {
   res.render('index', {num: 3} );  // 여기서 index의 의미는 views/index.ejs를 의미함; num은 index.ejs에서 사용할 변수
 });
+
+// get
+app.get('/create_get', function(req, res) {
+    console.log(req.query);
+    res.send('hi');
+  });
+  
+// post
+app.post('/create_post', function(req, res) {
+    console.log(req.body);
+    res.send('hi');
+  });
 
 
 app.listen(3000);
