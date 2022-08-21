@@ -30,8 +30,11 @@
         <li><%= comment.id %><%= comment.content %></li> 
         <form action="/update/<%= comment.id %>" method="post">
           <input type="text" name="content"><br><br>
-          <input type="submit" value="수정하기"><br><br><br><br>
-        </form>        
+          <input type="submit" value="수정하기"><br><br>
+        </form>    
+        <form action="/delete/<%= comment.id %>" method="post">
+          <input type="submit" value="삭제하기"><br><br><br><br>
+        </form>      
     <%} %>
   </ul>    
 <hr>
