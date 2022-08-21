@@ -25,7 +25,9 @@
 <h1> comments 목록 </h1>
   <ul>
     <% for (comment of comments) { %>
-        <li><%= comment %></li>
+        <!-- <li><%= comment %></li> // 배열에서 읽을 경우-->
+        <!-- 아래는 객체에서 읽을 경우 -->
+        <li><%= comment.content %></li> 
     <%} %>
   </ul>    
 <hr>

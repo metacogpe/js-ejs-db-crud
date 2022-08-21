@@ -46,9 +46,11 @@ app.set('view engine', 'ejs');  // ejs 파일을 만들어서 render로 응답�
 // use res.render to load up an ejs view file
 
 // index page
-app.get('/', function(req, res) {
-//   res.render('index', {num: 3} );  // 여기서 index의 의미는 views/index.ejs를 의미함; num은 index.ejs에서 사용할 변수
-    res.render('index', {comments: []} );  // 여기서 index의 의미는 views/index.ejs를 의미함; comments는 index.ejs에서 사용할 변수
+app.get('/', async function(req, res) {
+    const comments = await Comments.findAll(); // 3) DB에서 데이터 가져오기
+//   res.render('index', {num: 3} );  // 1) 여기서 index의 의미는 views/index.ejs를 의미함; num은 index.ejs에서 사용할 변수
+    // console.log(comments); // DB에서 가져온 데이터 확인 : 객체 형태로 가져옴 -> index.ejs에서 객체를 content로 바꿔서 사용
+    res.render('index', {comments: comments} );  // 2) 여기서 index의 의미는 views/index.ejs를 의미함; comments는 index.ejs에서 사용할 변수
 });
 
 // get
