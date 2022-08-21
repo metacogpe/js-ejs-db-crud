@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');  // ejs 파일을 만들어서 render로 응답�
 
 // index page
 app.get('/', function(req, res) {
-  res.render('index');  // 여기서 index의 의미는 views/index.ejs를 의미함
+  res.render('index', {num: 3} );  // 여기서 index의 의미는 views/index.ejs를 의미함; num은 index.ejs에서 사용할 변수
 });
 
 
