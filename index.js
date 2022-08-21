@@ -19,22 +19,25 @@ const sequelize = new Sequelize({
     storage: 'database.sqlite'
   });
 
-const User = sequelize.define('User', {
+const Comments = sequelize.define('Comments', {
   // Model attributes are defined here
-  firstName: {
+  content: {
     type: DataTypes.STRING,
     allowNull: false
-  },
-  lastName: {
-    type: DataTypes.STRING
-    // allowNull defaults to true
   }
 }, {
   // Other model options go here
 });
 
+(
+    async () => {
+        await Comments.sync();
+        console.log("DB 연결 성공");
+    }
+)();
+
 // `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
+console.log(Comments === sequelize.models.Comments); // true
 
 
 // set the view engine to ejs :  viewes폴더에 index.ejs를 만들어 사용 
