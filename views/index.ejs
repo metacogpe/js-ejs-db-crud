@@ -22,9 +22,13 @@
   </form>
 
 <!-- comments 배열을 사용한 목록 출력   -->
-  <h1> comments 목록 </h1>
-    <%= comments %>
-    <hr>
+<h1> comments 목록 </h1>
+  <ul>
+    <% for (comment of comments) { %>
+        <li><%= comment %></li>
+    <%} %>
+  </ul>    
+<hr>
 
 
 </body>
