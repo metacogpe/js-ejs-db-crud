@@ -3,6 +3,7 @@
 var express = require('express');
 var app = express();
 
+let comments = []; // array of comments : 게시판용 DB(컴퓨터 off 되면 초기화)) 
 app.use(express.json()) // for parsing application/json : post 방식 body 파싱 용도
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded : post 방식 body 파싱 용도
 
@@ -25,7 +26,9 @@ app.get('/create_get', function(req, res) {
 // post
 app.post('/create_post', function(req, res) {
     console.log(req.body);
-    res.send('hi');
+    const { content } = req.body;
+    comments.push(content);
+    console.log(comments);
   });
 
 
