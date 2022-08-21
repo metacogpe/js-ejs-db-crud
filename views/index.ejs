@@ -28,6 +28,10 @@
         <!-- <li><%= comment %></li> // 배열에서 읽을 경우-->
         <!-- 아래는 객체에서 읽을 경우 -->
         <li><%= comment.id %><%= comment.content %></li> 
+        <form action="/update/<%= comment.id %>" method="post">
+          <input type="text" name="content"><br><br>
+          <input type="submit" value="Submit:post_method"><br><br><br><br>
+        </form>        
     <%} %>
   </ul>    
 <hr>

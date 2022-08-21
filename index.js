@@ -71,6 +71,21 @@ app.post('/create_post', async function(req, res) {
     res.redirect('/');
   });
 
+ // update
+app.post('/update/:id', async function(req, res) {
+  console.log(req.params);
+  console.log(req.body);
+  const { content } = req.body; 
+  const { id } = req.params;
+  // https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#simple-update-queries : simple update queries(공식문서)
+  await Comments.update({ content: content }, {
+   where: {
+     id: id     // 해당 id 기반으로 업데이트
+   }
+  });
+
+  res.redirect('/');
+}); 
 
 app.listen(3000);
 console.log('Server is listening on port 3000');
