@@ -48,7 +48,7 @@ app.set('view engine', 'ejs');  // ejs 파일을 만들어서 render로 응답�
 // index page
 app.get('/', function(req, res) {
 //   res.render('index', {num: 3} );  // 여기서 index의 의미는 views/index.ejs를 의미함; num은 index.ejs에서 사용할 변수
-    res.render('index', {comments: comments} );  // 여기서 index의 의미는 views/index.ejs를 의미함; comments는 index.ejs에서 사용할 변수
+    res.render('index', {comments: []} );  // 여기서 index의 의미는 views/index.ejs를 의미함; comments는 index.ejs에서 사용할 변수
 });
 
 // get
@@ -58,11 +58,14 @@ app.get('/create_get', function(req, res) {
   });
   
 // post
-app.post('/create_post', function(req, res) {
+app.post('/create_post', async function(req, res) {
     console.log(req.body);
     const { content } = req.body;
-    comments.push(content);
-    console.log(comments);
+    // comments.push(content);  // 배열이 아닌 DB에 저장하기 위해 주석처리, 아래의 DB에 저장하는 코드로 대체
+    // https://sequelize.org/docs/v6/core-concepts/model-querying-basics/ : DB에 저장하는 코드(공식문서)
+    // Create a new comment : ORM 방식
+    const jane = await Comments.create({ content: content });
+    console.log("Jane's auto-generated ID:", jane.id);
     res.redirect('/');
   });
 
