@@ -32,7 +32,7 @@ const Comments = sequelize.define('Comments', {
 (
     async () => {
         await Comments.sync();
-        console.log("DB 연결 성공");
+        console.log("The table for the Comments model was just (re)created!");
     }
 )();
 
