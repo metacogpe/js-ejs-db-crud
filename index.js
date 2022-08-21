@@ -3,9 +3,39 @@
 var express = require('express');
 var app = express();
 
-let comments = []; // array of comments : 게시판용 DB(컴퓨터 off 되면 초기화)) 
+
 app.use(express.json()) // for parsing application/json : post 방식 body 파싱 용도
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded : post 방식 body 파싱 용도
+
+// let comments = []; // array of comments : 게시판용 DB(컴퓨터 off 되면 초기화)) 
+// 위의 배열 대신에 DB 사용 : DB는 컴퓨터 off 되어도 데이터 유지
+// https://sequelize.org/docs/v6/core-concepts/model-basics/
+const { Sequelize, DataTypes } = require('sequelize');
+// const sequelize = new Sequelize('sqlite::memory:'); // 메모리 방식
+// https://sequelize.org/docs/v6/getting-started/#connecting-to-a-database
+// 파일 방식으로 컴퓨터 off 되어도 데이터 유지
+const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: 'database.sqlite'
+  });
+
+const User = sequelize.define('User', {
+  // Model attributes are defined here
+  firstName: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  lastName: {
+    type: DataTypes.STRING
+    // allowNull defaults to true
+  }
+}, {
+  // Other model options go here
+});
+
+// `sequelize.define` also returns the model
+console.log(User === sequelize.models.User); // true
+
 
 // set the view engine to ejs :  viewes폴더에 index.ejs를 만들어 사용 
 app.set('view engine', 'ejs');  // ejs 파일을 만들어서 render로 응답에 실어 보낼 수 있음
