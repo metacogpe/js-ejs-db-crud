@@ -87,5 +87,22 @@ app.post('/update/:id', async function(req, res) {
   res.redirect('/');
 }); 
 
+ // delete
+ app.post('/delete/:id', async function(req, res) {
+  console.log(req.params);
+  console.log(req.body);
+  const { content } = req.body; 
+  const { id } = req.params;
+  // https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#simple-delete-queries : simple delete queries(공식문서) 
+  // Delete everyone named "Jane"
+  await Comments.destroy({
+    where: {
+      id: id
+    }
+  }); 
+
+  res.redirect('/');
+}); 
+
 app.listen(3000);
 console.log('Server is listening on port 3000');
